@@ -26,5 +26,9 @@ A backend-only final project for a car wash booking platform built with Express,
 - `GET /api/bookings/my`
 - `PATCH /api/admin/bookings/:id/approve`
 
-## Notes
-This scaffold follows the same general Express + TypeScript + MongoDB direction used in course examples, but is reorganized into a cleaner project structure for the final project.
+## Additional Features
+
+- Booking rescheduling by admin
+- Booking cancellation by users
+- Role-based authorization (Admin / Customer)
+- Analytics dashboard for admin
