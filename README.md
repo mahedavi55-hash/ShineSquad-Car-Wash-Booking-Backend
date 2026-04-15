@@ -32,3 +32,12 @@ A backend-only final project for a car wash booking platform built with Express,
 - Booking cancellation by users
 - Role-based authorization (Admin / Customer)
 - Analytics dashboard for admin
+
+## Technologies
+
+- Node.js
+- TypeScript
+- Express.js
+- MongoDB (Mongoose)
+- JWT Authentication
+- Winston Logger
