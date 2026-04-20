@@ -17,7 +17,7 @@ export class AdminController {
 
   approve = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
-      const booking = await this.approveBooking.execute(req.params.id);
+      const booking = await this.approveBooking.execute(String(req.params.id));
       sendSuccess(res, 200, 'Booking approved successfully.', booking);
     } catch (error) {
       next(error);
@@ -26,7 +26,10 @@ export class AdminController {
 
   decline = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
-      const booking = await this.declineBooking.execute(req.params.id, req.body.adminComment);
+      const booking = await this.declineBooking.execute(
+        String(req.params.id),
+        req.body.adminComment
+      );
       sendSuccess(res, 200, 'Booking declined successfully.', booking);
     } catch (error) {
       next(error);
@@ -35,7 +38,7 @@ export class AdminController {
 
   complete = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
-      const booking = await this.completeBooking.execute(req.params.id);
+      const booking = await this.completeBooking.execute(String(req.params.id));
       sendSuccess(res, 200, 'Booking marked as completed.', booking);
     } catch (error) {
       next(error);
@@ -44,7 +47,10 @@ export class AdminController {
 
   reschedule = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
-      const booking = await this.rescheduleBooking.execute(req.params.id, req.body.slotId);
+      const booking = await this.rescheduleBooking.execute(
+        String(req.params.id),
+        req.body.slotId
+      );
       sendSuccess(res, 200, 'Booking rescheduled successfully.', booking);
     } catch (error) {
       next(error);

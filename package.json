@@ -2,17 +2,23 @@
   "name": "shinesquad-car-wash-booking-backend",
   "version": "1.0.0",
   "description": "Backend API for ShineSquad Car Wash Booking built with clean architecture principles.",
-  "main": "dist/index.js",
+  "main": "dist/src/index.js",
   "scripts": {
     "dev": "ts-node-dev --project tsconfig.json --respawn --transpile-only src/index.ts",
     "build": "tsc",
-    "start": "node dist/index.js",
+    "start": "node dist/src/index.js",
     "test": "jest --runInBand",
     "test:watch": "jest --watch",
     "coverage": "jest --coverage",
     "lint": "echo 'No linter configured yet'"
   },
-  "keywords": ["express", "typescript", "mongodb", "booking", "clean-architecture"],
+  "keywords": [
+    "express",
+    "typescript",
+    "mongodb",
+    "booking",
+    "clean-architecture"
+  ],
   "author": "Rakib",
   "license": "ISC",
   "dependencies": {

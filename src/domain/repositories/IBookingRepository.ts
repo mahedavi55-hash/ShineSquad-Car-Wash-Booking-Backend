@@ -6,5 +6,10 @@ export interface IBookingRepository {
   findById(id: string): Promise<Booking | null>;
   findByUserId(userId: string): Promise<Booking[]>;
   findAll(): Promise<Booking[]>;
-  updateStatus(id: string, status: BookingStatus, adminComment?: string): Promise<Booking | null>;
+  update(id: string, updates: Partial<Booking>): Promise<Booking | null>;
+  updateStatus(
+    id: string,
+    status: BookingStatus,
+    adminComment?: string
+  ): Promise<Booking | null>;
 }

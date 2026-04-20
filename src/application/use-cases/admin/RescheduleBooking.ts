@@ -1,8 +1,5 @@
-import { Booking } from '../../../domain/entities/Booking';
-import { BookingStatus } from '../../../domain/enums/BookingStatus';
 import { IBookingRepository } from '../../../domain/repositories/IBookingRepository';
 import { ISlotRepository } from '../../../domain/repositories/ISlotRepository';
-import { BookingRules } from '../../../domain/services/BookingRules';
 
 export class RescheduleBooking {
   constructor(
@@ -10,28 +7,24 @@ export class RescheduleBooking {
     private readonly slotRepository: ISlotRepository,
   ) {}
 
-  async execute(bookingId: string, newSlotId: string): Promise<Booking> {
+  async execute(bookingId: string, newSlotId: string) {
     const booking = await this.bookingRepository.findById(bookingId);
     if (!booking) {
       throw new Error('Booking not found.');
     }
 
-    const newSlot = await this.slotRepository.findById(newSlotId);
-    BookingRules.ensureSlotIsBookable(newSlot);
-
-    if (booking.slotId === newSlotId) {
-      throw new Error('Booking is already assigned to this slot.');
+    const slot = await this.slotRepository.findById(newSlotId);
+    if (!slot) {
+      throw new Error('New slot not found.');
     }
-
-    await this.slotRepository.incrementBookingCount(newSlotId);
 
     const updatedBooking = await this.bookingRepository.update(bookingId, {
       slotId: newSlotId,
-      status: BookingStatus.PENDING,
+      status: booking.status,
     });
 
     if (!updatedBooking) {
-      throw new Error('Failed to reschedule booking.');
+      throw new Error('Unable to reschedule booking.');
     }
 
     return updatedBooking;

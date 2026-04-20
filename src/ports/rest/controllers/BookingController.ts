@@ -24,7 +24,10 @@ export class BookingController {
 
   createUser = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
-      const booking = await this.createUserBooking.execute({ ...req.body, userId: req.user!.id });
+      const booking = await this.createUserBooking.execute({
+        ...req.body,
+        userId: req.user!.id,
+      });
       sendSuccess(res, 201, 'Booking created successfully.', booking);
     } catch (error) {
       next(error);
@@ -42,7 +45,7 @@ export class BookingController {
 
   cancel = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
-      const booking = await this.cancelBooking.execute(req.params.id);
+      const booking = await this.cancelBooking.execute(String(req.params.id));
       sendSuccess(res, 200, 'Booking cancelled successfully.', booking);
     } catch (error) {
       next(error);
